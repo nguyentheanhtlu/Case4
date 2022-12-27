@@ -1,17 +1,18 @@
 import express from 'express';
-import StudentController from '../controller/students.controller'
+import EmployeeController from "../controller/employee.controller";
 
 const routes = express.Router();
 
-const studentControllers = new StudentController();
+const employeeControllers = new EmployeeController();
 
 
-routes.get('/students',studentControllers.index);
-routes.get('/students/add',studentControllers.create);
-routes.post('/students/add',studentControllers.AddStudent);
-routes.get('/students/update/:id',studentControllers.showUpdateStudent);
-routes.post('/students/update/:id',studentControllers.update);
-routes.get('/students/:id/delete',studentControllers.delete);
+routes.get('/employees',employeeControllers.index);
+routes.get('/employees/add',employeeControllers.create);
+routes.post('/employees/add',employeeControllers.AddEmployee);
+routes.get('/employees/update/:id',employeeControllers.showUpdateEmployee);
+routes.post('/employees/update/:id',employeeControllers.update);
+routes.get('/employees/:id/delete',employeeControllers.delete);
+routes.get('/employees/search/room',employeeControllers.searchBranches)
 
 
 export default routes;

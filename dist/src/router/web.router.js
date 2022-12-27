@@ -4,14 +4,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const students_controller_1 = __importDefault(require("../controller/students.controller"));
+const employee_controller_1 = __importDefault(require("../controller/employee.controller"));
 const routes = express_1.default.Router();
-const studentControllers = new students_controller_1.default();
-routes.get('/students', studentControllers.index);
-routes.get('/students/add', studentControllers.create);
-routes.post('/students/add', studentControllers.AddStudent);
-routes.get('/students/update/:id', studentControllers.showUpdateStudent);
-routes.post('/students/update/:id', studentControllers.update);
-routes.get('/students/:id/delete', studentControllers.delete);
+const employeeControllers = new employee_controller_1.default();
+routes.get('/employees', employeeControllers.index);
+routes.get('/employees/add', employeeControllers.create);
+routes.post('/employees/add', employeeControllers.AddEmployee);
+routes.get('/employees/update/:id', employeeControllers.showUpdateEmployee);
+routes.post('/employees/update/:id', employeeControllers.update);
+routes.get('/employees/:id/delete', employeeControllers.delete);
+routes.get('/employees/search/room', employeeControllers.searchBranches);
 exports.default = routes;
 //# sourceMappingURL=web.router.js.map

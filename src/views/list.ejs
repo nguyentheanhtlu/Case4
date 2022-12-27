@@ -26,6 +26,10 @@
 
 </head>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"
+        integrity="sha512-QTnb9BQkG4fBYIt9JGvYmxPpd6TBeKp6lsUrtiVQsrJ9sb33Bn9s0wMQO9qVBFbPX3xHRAsBHvXlcsrnJjExjg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <body id="page-top">
 
 <!-- Page Wrapper -->
@@ -287,37 +291,48 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Product List</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Employee List</h6>
                     </div>
                     <div class="card-body">
 
                         <div class="table-responsive">
 
-                            <a href="/students/add" class="btn btn-success mb-2">Add</a>
+                            <a href="/employees/add" class="btn btn-success mb-2">Add</a>
+                            <select class="custom-select d-inline-block w-25 mb-2" onchange="chooseRoom(this.value)">
+                                <option value="All Rooms">All</option>
+                                <% rooms.forEach(branch => { %>
+                                    <option value="<%= branch.id %>"><%= branch.name %></option>
+                                <% }) %>
+                            </select>
                             <table class="table table-bordered" id="dataTable">
                                 <thead>
                                 <tr>
                                     <th>
                                     </th>
+                                    <th>EmployeeCode</th>
                                     <th>Name</th>
-                                    <th>Class</th>
-                                    <th>Evaluate</th>
+                                    <th>Age</th>
+                                    <th>Salary</th>
+                                    <th>Branch</th>
 
                                 </tr>
                                 </thead>
-                                <tbody id="list-product">
+                                <tbody id="list-employees">
                                 <% data.forEach((item, index) => { %>
                                     <tr>
                                         <td><%= index + 1 %>
                                         </td>
+                                        <td><%= item.employeeCode %></td>
                                         <td><%= item.name %></td>
-                                        <td><%= (item.class) ? item.class.name: "None" %></td>
-                                        <td><%= item.evaluate%></td>
+                                        <td><%= item.age %></td>
+                                        <td><%= item.salary %></td>
+                                        <td><%= (item.branch) ? item.branch.name : "None" %></td>
                                         <td>
-                                            <a href="/students/update/<%= item._id %>"
+                                            <a href="/employees/update/<%= item._id %>"
                                                class="btn btn-primary">Update</a>
-                                            <a onclick="return confirm('Are you sure you want to delete student?')"
-                                               href="/students/<%= item._id %>/delete" class="btn btn-danger">Delete</a>
+                                            <a onclick="return confirm('Do you want to delete?')"
+                                               href="/employees/<%= item._id %>/delete"
+                                               class="btn btn-danger">Delete</a>
                                         </td>
 
                                     </tr>
@@ -391,10 +406,39 @@
 <script src="/js/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="/js/demo/datatables-demo.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 
 <script src="/js/my.js"></script>
+
+<script>
+    const chooseRoom = value => {
+        axios.get('http://localhost:3000/employees/search/room', {
+            params: {
+                roomId: value
+            }
+        }).then(res => {
+            let data = res.data;
+            let html = '';
+            data.forEach((employee, index) => {
+                html += `<tr>`;
+                html += `<td>${index + 1}</td>`;
+                html += `<td>${employee.employeeCode}</td>`;
+                html += `<td>${employee.name}</td>`;
+                html += `<td>${employee.age}</td>`;
+                html += `<td>${employee.salary}</td>`;
+                html += `<td>${employee.branch.name}</td>`;
+                html += `<td>
+
+<a href="/employees/update/${employee._id}"
+                                               class="btn btn-primary">Update</a>
+                          <a onclick="return confirm('Do you want to delete?')"
+                                               href="/employees/delete/${employee._id}" class="btn btn-danger">Delete</a>
+
+                     </td>`;
+            })
+            document.getElementById('list-employees').innerHTML = html;
+        })
+    }
+</script>
 
 </body>
 

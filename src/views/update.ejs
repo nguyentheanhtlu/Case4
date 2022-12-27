@@ -282,11 +282,18 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Student List</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Employee List</h6>
                     </div>
                     <div class="card-body">
 
-                        <form method="POST" action="/students/update/<%= data._id %>" >
+                        <form method="POST" action="/employees/update/<%= data._id %>" >
+                            <div class="form-group">
+                                <label for="">Employee Code</label>
+                                <input type="text" name="employeeCode" class="form-control" id="" placeholder=""
+                                       value="<%= data.employeeCode %>">
+                            </div>
+
+
                             <div class="form-group">
                                 <label for="">Name</label>
                                 <input type="text" name="name" class="form-control" id="" placeholder=""
@@ -294,39 +301,30 @@
 
 
                             </div>
+
                             <div class="form-group">
-                                <label for="">Class</label>
-                                <select class="form-control" id="" name="class">
-                                    <% classStudents.forEach(item => { %>
+                                <label for="">Age</label>
+                                <input type="number" name="age" class="form-control" id="" placeholder=""
+                                       value="<%= data.age %>">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Salary</label>
+                                <input type="number" class="form-control" id="" name="salary"
+                                       value="<%= data.salary %>" >
+
+                            </div>
+                            <div class="form-group">
+                                <label for="">Branch</label>
+                                <select class="form-control" id="" name="branch">
+                                    <% branch.forEach(item => { %>
                                         <option <%= item._id.toString() === data.class?._id?.toString() ? "selected" : "" %>
                                                 value="<%= item._id %>"><%= item.name %></option>
                                     <% }) %>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="">TheoreticalScore</label>
-                                <input type="number" name="theoreticalScore" class="form-control" id="" placeholder=""
-                                       value="<%= data.theoreticalScore %>">
-                            </div>
-                            <div class="form-group">
-                                <label for="">PracticePoints</label>
-                                <input type="number" class="form-control" id="" name="practicePoints"
-                                       value="<%= data.practicePoints %>" >
-
-                            </div>
-
-                            <div class="form-group">
-                                <label for="">Evaluate</label>
-                                <textarea class="form-control" id="" rows="3" name="evaluate" placeholder="" ><%= data.evaluate %></textarea >
-                            </div>
-                            <div class="form-group">
-                                <label for="">Describe</label>
-                                <textarea class="form-control" id="" rows="3" name="describe" placeholder=""><%= data.describe %></textarea>
-                            </div>
-
 
                            <button type="submit" class="btn btn-primary">Update</button>
-                                <a href="/students" class="btn btn-primary">Cancel</a>
+                                <a href="/employees" class="btn btn-primary">Cancel</a>
                         </form>
                     </div>
                 </div>

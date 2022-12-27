@@ -282,43 +282,37 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Product List</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Employee List</h6>
                     </div>
                     <div class="card-body">
 
                         <form method="POST" >
+                            <div class="form-group">
+                                <label for="">Employee Code</label>
+                                <input type="text" name="employeeCode" class="form-control" id="" placeholder="">
+
+                            </div>
                             <div class="form-group">
                                 <label for="">Name</label>
                                 <input type="text" name="name" class="form-control" id="" placeholder="">
 
                             </div>
                             <div class="form-group">
-                                <label for="">Class</label>
-                                <select class="form-control" id="" name="class">
+                                <label for="">Age</label>
+                                <input type="number" name="age" class="form-control" id="" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Salary</label>
+                                <input type="number" class="form-control" id="" name="salary">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Branch</label>
+                                <select class="form-control" id="" name="branch">
                                     <% data.forEach(item => { %>
                                         <option value="<%= item.id %>"><%= item.name %></option>
                                     <% }) %>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="">TheoreticalScore</label>
-                                <input type="number" name="theoreticalScore" class="form-control" id="" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="">PracticePoints</label>
-                                <input type="number" class="form-control" id="" name="practicePoints">
-
-                            </div>
-
-                            <div class="form-group">
-                                <label for="">Evaluate</label>
-                                <textarea class="form-control" id="" rows="3" name="evaluate" placeholder=""></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Describe</label>
-                                <textarea class="form-control" id="" rows="3" name="describe" placeholder=""></textarea>
-                            </div>
-
 
                             <button type="submit" class="btn btn-primary">Save</button>
                         </form>
